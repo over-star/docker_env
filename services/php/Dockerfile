@@ -36,3 +36,5 @@ RUN apk --no-cache add shadow && usermod -u 1000 www-data && groupmod -g 1000 ww
 
 
 WORKDIR /var/www
+# hyperf config
+# RUN cd se-supply-chain-server&&php watch

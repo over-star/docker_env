@@ -33,8 +33,8 @@ services:
         PHP_EXTENSIONS: ${PHP_EXTENSIONS}
         TZ: "$TZ"
     container_name: php
-    expose:
-      - 9501
+    ports:
+      - "9501:9501"
     extra_hosts:
       - "www.site1.com:172.17.0.1"
     volumes:

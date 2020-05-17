@@ -95,8 +95,9 @@ if [[ -z "${EXTENSIONS##*,exif,*}" ]]; then
 fi
 
 if [[ -z "${EXTENSIONS##*,bcmath,*}" ]]; then
+
     echo "---------- Install bcmath ----------"
-	docker-php-ext-install ${MC} bcmath
+    docker-php-ext-install -j$(nproc) bcmath
 fi
 
 if [[ -z "${EXTENSIONS##*,calendar,*}" ]]; then

@@ -22,10 +22,10 @@ $ docker exec -it nginx nginx -s reload
 增加需要的PHP扩展：
 ```bash
 PHP_EXTENSIONS=pdo_mysql,opcache,redis       # PHP 要安装的扩展列表，英文逗号隔开
-PHP54_EXTENSIONS=opcache,redis                 # PHP 5.4要安装的扩展列表，英文逗号隔开
 ```
 然后重新build PHP镜像。
 ```bash
+docker-compose stop php
 docker-compose build php
 ```
 可用的扩展请看同文件的`env.sample`注释块说明。

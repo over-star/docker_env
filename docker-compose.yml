@@ -76,6 +76,14 @@ services:
      TZ: "$TZ"
    networks:
      - default
+  ubuntu:
+    build:
+      context: ./services/ubuntu
+    container_name: ubuntu
+    # restart: always
+    tty: true
+    volumes:
+      - ${SOURCE_DIR}:/var/www:rw
 
 networks:
   default:

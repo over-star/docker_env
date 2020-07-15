@@ -3,7 +3,7 @@ DNMP（Docker + Nginx + MySQL + PHP7 + Redis）
 ## 1.快速使用
 1. 拷贝并命名配置文件（Windows系统请用`copy`命令），启动：
     ```
-    $ cd dnmp                                           # 进入项目目录
+    $ cd docker_env                                           # 进入项目目录
     $ cp env.sample .env                                # 复制环境变量文件
     $ cp docker-compose.sample.yml docker-compose.yml   
     $ docker-compose up -d                                # 启动
@@ -23,12 +23,12 @@ $ docker exec -it nginx nginx -s reload
 ```bash
 PHP_EXTENSIONS=pdo_mysql,opcache,redis       # PHP 要安装的扩展列表，英文逗号隔开
 ```
+
 然后重新build PHP镜像。
 ```bash
 docker-compose stop php
 docker-compose build php
 ```
-可用的扩展请看同文件的`env.sample`注释块说明。
 
 
 ## 4.管理命令
@@ -66,18 +66,6 @@ alias dredis='docker exec -it redis /bin/sh'
 ```bash
 $ dphp
 ```
-
-## 5.使用Log
-
-Log文件生成的位置依赖于conf下各log配置的值。
-
-### Nginx日志
-`log`会目录映射Nginx容器的`/var/log/nginx`目录，所以在Nginx配置文件中，需要输出log的位置，我们需要配置到`/var/log/nginx`目录，如：
-```
-error_log  /var/log/nginx/nginx.localhost.error.log  warn;
-```
-
-
 
 ## License
 MIT

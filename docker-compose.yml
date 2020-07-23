@@ -80,8 +80,10 @@ services:
     build:
       context: ./services/ubuntu
     container_name: ubuntu
-    # restart: always
+    restart: always
     tty: true
+    ports:
+      - "8080:8080"
     volumes:
       - ${SOURCE_DIR}:/var/www:rw
 

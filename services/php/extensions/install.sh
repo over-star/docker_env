@@ -528,8 +528,13 @@ if [[ -z "${EXTENSIONS##*,swoole,*}" ]]; then
         echo http://mirrors.ustc.edu.cn/alpine/v3.7/main > /etc/apk/repositories 
         echo http://mirrors.ustc.edu.cn/alpine/v3.7/community >> /etc/apk/repositories
         apk --no-cache add autoconf gcc g++ make openssl openssl-dev
-        pecl install swoole-4.4.18 
-        docker-php-ext-enable swoole
+        mkdir swoole \
+        && tar -xf swoole-4.4.2.tgz -C swoole --strip-components=1 \
+        && ( cd swoole && phpize && ./configure --enable-openssl && make $mc && make install ) \
+        && docker-php-ext-enable swoole
+
+        # pecl install swoole-4.5.2 
+        # docker-php-ext-enable swoole
     else
         installExtensionFromTgz swoole-2.0.11
     fi

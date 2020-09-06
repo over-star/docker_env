@@ -3,6 +3,7 @@ DNMP（Docker + Nginx + MySQL + PHP7 + Redis）
 ## 1.快速使用
 1. 拷贝并命名配置文件（Windows系统请用`copy`命令），启动：
     ```
+
     $ cd docker_env                                       # 进入项目目录
     $ docker-compose up -d                                # 启动
     ```

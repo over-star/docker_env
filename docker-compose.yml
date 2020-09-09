@@ -34,7 +34,9 @@ services:
         TZ: "$TZ"
     container_name: php
     ports:
+      - "9500:9500"
       - "9501:9501"
+      - "9502:9502"
     extra_hosts:
       - "www.site1.com:172.17.0.1"
     volumes:
@@ -86,6 +88,17 @@ services:
       - "8080:8080"
     volumes:
       - ${SOURCE_DIR}:/var/www:rw
-
+  neo4j:
+    image: neo4j:3.5.15
+    container_name: neo4j
+    restart: always
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+      - NEO4J_dbms_memory_heap_maxSize=4G
+      - NEO4J_AUTH=neo4j/123456  
+    networks:
+      - default
 networks:
   default:

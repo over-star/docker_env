@@ -88,6 +88,8 @@ services:
       - "8080:8080"
     volumes:
       - ${SOURCE_DIR}:/var/www:rw
+    networks:
+      - default      
   neo4j:
     image: neo4j:3.5.15
     container_name: neo4j
@@ -100,5 +102,6 @@ services:
       - NEO4J_AUTH=neo4j/123456  
     networks:
       - default
+      
 networks:
   default:

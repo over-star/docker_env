@@ -200,6 +200,16 @@ fi
 
 if [[ -z "${EXTENSIONS##*,gd,*}" ]]; then
     echo "---------- Install gd ----------"
+    isPhpVersionGreaterOrEqual 7 4
+
+    if [[ "$?" = "1" ]]; then
+        # "--with-xxx-dir" was removed from php 7.4,
+        # issue: https://github.com/docker-library/php/issues/912
+        options="--with-freetype --with-jpeg --with-webp"
+    else
+        options="--with-gd --with-freetype-dir=/usr/include/ --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/"
+    fi
+
     apk add --no-cache \
         freetype \
         freetype-dev \
@@ -207,7 +217,8 @@ if [[ -z "${EXTENSIONS##*,gd,*}" ]]; then
         libpng-dev \
         libjpeg-turbo \
         libjpeg-turbo-dev \
-    && docker-php-ext-configure gd \
+	libwebp-dev \
+    && docker-php-ext-configure gd ${options} \
     && docker-php-ext-install ${MC} gd \
     && apk del \
         freetype-dev \

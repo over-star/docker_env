@@ -62,20 +62,34 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
       TZ: "$TZ"
+  mysql56:
+    image: mysql:5.6.27
+    container_name: mysql56
+    ports:
+      - "${MYSQL56_HOST_PORT}:3306"
+    volumes:
+      - ${MYSQL56_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${DATA_DIR}/mysql56:/var/lib/mysql/:rw
+    restart: always
+    networks:
+      - default
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL56_ROOT_PASSWORD}"
+      TZ: "$TZ"
   redis:
-   image: redis:${REDIS_VERSION}
-   container_name: redis
-   ports:
-     - "${REDIS_HOST_PORT}:6379"
-   volumes:
-     - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
-     - ${DATA_DIR}/redis:/data/:rw
-   restart: always
-   entrypoint: ["redis-server", "/etc/redis.conf"]
-   environment:
-     TZ: "$TZ"
-   networks:
-     - default
+    image: redis:${REDIS_VERSION}
+    container_name: redis
+    ports:
+      - "${REDIS_HOST_PORT}:6379"
+    volumes:
+      - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
+      - ${DATA_DIR}/redis:/data/:rw
+    restart: always
+    entrypoint: [ "redis-server", "/etc/redis.conf" ]
+    environment:
+      TZ: "$TZ"
+    networks:
+      - default
   ubuntu:
     build:
       context: ./services/ubuntu
@@ -87,7 +101,7 @@ services:
     volumes:
       - ${SOURCE_DIR}:/var/www:rw
     networks:
-      - default      
+      - default
   neo4j:
     image: neo4j:3.5.15
     container_name: neo4j
@@ -97,9 +111,9 @@ services:
       - 7687:7687
     environment:
       - NEO4J_dbms_memory_heap_maxSize=4G
-      - NEO4J_AUTH=neo4j/123456  
+      - NEO4J_AUTH=neo4j/123456
     networks:
       - default
-      
+
 networks:
-  default:
+  default: null

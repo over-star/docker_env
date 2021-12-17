@@ -1,6 +1,6 @@
 DNMP（Docker + Nginx + MySQL + PHP7 + Redis）
-qqqq
-## 1.快速使用
+qq
+ssss## 1.快速使用
 1. 拷贝并命名配置文件（Windows系统请用`copy`命令），启动：
     ```
 
